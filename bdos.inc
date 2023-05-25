@@ -1,9 +1,10 @@
 ;------------------------------------------------------------------------
-;  dbgutil.inc
-;  Copyright (c)2021 Kevin Boone, GPL v3.0
+;  bdos.inc
+;
+;  Various constants related to BDOS
+; 
+;  Copyright (c)2021-3 Kevin Boone, GPL v3.0
 ;------------------------------------------------------------------------
-
-; List of the global symbols in dbgutl
 
 	.Z80
 

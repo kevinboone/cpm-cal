@@ -1,8 +1,6 @@
 ;------------------------------------------------------------------------
 ;  intmath.asm 
-;
-;  Various routines for 16-bit integer math 
-;
+;  See intmath.inc for descriptions
 ;  Copyright (c)2022 Kevin Boone, GPL v3.0
 ;------------------------------------------------------------------------
 

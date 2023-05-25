@@ -17,6 +17,7 @@
 	include intmath.inc
 	include date.inc
 	include string.inc
+	include romwbw.inc
 
 	JP	main
 
@@ -34,9 +35,21 @@ prthelp:
 	RET
 
 ;------------------------------------------------------------------------
+;  prtversion
+;  Print the version message
+;------------------------------------------------------------------------
+prtversion:
+	PUSH	HL
+	LD 	HL, ver_msg
+	CALL	puts
+	POP	HL
+	RET
+
+;------------------------------------------------------------------------
 ;  m_arg0 
 ; Parse the string at HL as a month. This is usually the zero'th command
-;   line argument
+;   line argument. Lazily jump out of the function to .badmonth if the
+;   month is invalid.
 ;------------------------------------------------------------------------
 m_arg0:
 	PUSH	DE
@@ -55,7 +68,8 @@ m_arg0:
 ;------------------------------------------------------------------------
 ;  m_arg1 
 ; Parse the string at HL as a year. This is usually the 1'th command-line
-;   argument (starting at zero).
+;   argument (starting at zero). Lazily jump out of the function to
+;   .badyear if the year cannot be parsed as a number.
 ;------------------------------------------------------------------------
 m_arg1:
 	PUSH	DE
@@ -136,6 +150,7 @@ main:
 	OR	A
 	JR	Z, .notsw
 	; A is non-zero, so this is a switch character 
+	; The only switches we handle are /h, /v, and /s at present
 	CP	'H'
 	JR	NZ, .no_h
 	CALL	prthelp
@@ -147,6 +162,12 @@ main:
 	LD	(wssun), A
 	JR	.nextarg
 .no_s:
+	CP	'V'
+	JR	NZ, .no_v
+	CALL	prtversion
+	JP	.done
+	JR	.nextarg
+.no_v:
 	JP	.badswitch
 
 .notsw:
@@ -165,15 +186,45 @@ main:
 .not1:	
 	INC	B
 	jr	.nextarg
+
 .argsdone:
 
 	; Arguments are done. We should have seen exactly 2 non-switch
-	;   arguments. If not, jump to .usage to print and 
-	;   message and exit
+	;   arguments, if the user is specifying the date on the command
+	;   line. If there is no date, then we will check the RTC, if there is
+	;   one installed.
 
 	LD	A, B
 	CP	2
-	JR	NZ, .usage
+	JR	Z, .gotdate ; Two args -- skip the RTC check
+
+	; No date args. Let's see if we'gve got an RTC installed
+
+        LD 	HL, rtcbuf
+	CALL	rwbw_getrtc
+	CP	0
+	JR	NZ, .badrtc ; No we haven't, so don't interpret the results
+
+	LD	A, (rtcye)
+	LD	L, A
+	LD	H, 0
+	; Note that rwbw_getrtc returns year-2000 in a single byte
+	LD	DE, 2000
+	ADD	HL, DE 
+	LD	(year), HL
+	LD	A, (rtcmo)
+	LD	(month), A
+
+	JR	.gotdate
+
+.badrtc:	; If we get here, we have no RTC, and no command-line arguments.
+	LD	HL, nortc_msg
+	CALL	puts
+	CALL	newline
+
+	JR	.usage	
+
+.gotdate:
 
 	; At this point, we know we have plausible month and year
 	; So print them as the first output
@@ -340,7 +391,11 @@ blank:
 	db 0
 
 hlpmsg: 	
+	db "/h show help text"
+        db 13, 10
 	db "/s week starts sunday"
+        db 13, 10
+	db "/v show version"
         db 13, 10
 	db 0
 
@@ -350,7 +405,11 @@ numbuff:
 	db 0
 
 us_msg:
-	db "Usage: cal {/h} {/s} {month} {year}"
+	db "Usage: cal [/hsv] {month} {4-digit year}"
+        db 13, 10, 0
+
+ver_msg:
+	db "cal 0.1c, copyright (c)2023 Kevin Boone, GPL v3.0"
         db 13, 10, 0
 
 bm_msg:
@@ -362,6 +421,9 @@ by_msg:
 bs_msg:
 	db "Bad option.", 0 
 
+nortc_msg:
+	db "No RTC: give month and year", 0 
+
 ; Store month parsed from command line -- only one byte needed
 month:
 	db 0
@@ -370,7 +432,24 @@ month:
 year:
 	dw 0
 
+; Flag to indicate user wants week to start on Sunday
 wssun:	db 0
+
+; Six-byte buffer for date/time from the RTC. We can refer to the start of
+;   this buffer as rtcbuf, and the individual elements as rtcmo, rtcda, etc.
+rtcbuf:
+rtcye:  ; year
+	db 0
+rtcmo:  ; month
+	db 0
+rtcda:  ; day
+	db 0
+rtchr:  ; hour
+	db 0
+rtcmi:  ; min
+	db 0
+rtcse:  ; sec
+	db 0
 
 end 
 

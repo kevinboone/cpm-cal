@@ -4,7 +4,7 @@
 ;------------------------------------------------------------------------
 
 ; This module implements a very simple command-line argument parser. 
-; The caller calls clinit first, to set the parser up. Then it call
+; The caller calls clinit first, to set the parser up. Then it calls
 ;   clnext until clnext returns with the zero flag set. At this point,
 ;   there is nothing left to parse.
 ; If the Z flag is not set, clinit returns a number in A. If this number

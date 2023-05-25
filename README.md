@@ -2,6 +2,8 @@
 
 A Unix-like cal(endar) utility for CP/M
 
+Version 0.1c, May 2023
+
 ## What is this?
 
 This is my first attempt in nearly 40 years to write something reasonably
@@ -24,7 +26,13 @@ For example
 
 I wrote a C version of this utility for the Manx Aztec C compiler, 
 which results in an 11kB `.com` file.  This assembly-language version is 
-under 2kB. 
+about 2kB. 
+
+CP/M does not have any standard system call to read a real-time clock, even if
+one is fitted. In fact, most CP/M machines never had one. The ROMWBW firmware does
+have a way to read an RTC so, if this program is run on a CP/M machine with 
+this firmware, the current date will be used if none is given on the command
+line. Of course, this date can be overridden on the command line.
 
 ## Building
 
@@ -43,8 +51,11 @@ know, so building is a bit of a tedious process.
 
 The most obvious limitation is that CP/M systems typically don't have a 
 real-time clock, so the utility can't display the calendar for the
-current month if it is invoked without command-line arguments. Unlike
-the Linux version, this `cal` only supports the Gregorian calendar, and
+current month if it is invoked without command-line arguments. It will use 
+the RTC date on a z80 machine with ROMWBW firmware. Sometimes the RTC hardware
+will provide broken results, and there isn't much that can be done about this. 
+
+Unlike the Linux version, this `cal` only supports the Gregorian calendar, and
 can only display a single month.
 
 ## Technical notes
@@ -58,9 +69,24 @@ some technical complexity. It requires
 - Date calculation routines
 
 In case I should start feeling pleased with myself for fitting this all
-into 1920 bytes, I remind myself that the entire _assembler_ 
+into 2k, I remind myself that the entire _assembler_ 
 is only 20k. 
  
 The screenshot in this source bundle shows `cal` running on a real
 Z80-based CP/M machine, just to prove it really works.
+
+## Revisions
+
+0.1c May 2023
+
+- Added support for ROMWBW real-time clock
+
+0.1b April 2023
+
+- Fixed some bugs
+
+0.1a February 2022
+
+- First release
+
 

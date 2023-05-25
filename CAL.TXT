@@ -6,7 +6,7 @@ cal is a Unix-like cal(endar) utility for CP/M.
 Usage
 -----
 
-    A> cal {month} {year}
+    A> cal /s /h {month} {year}
 
 Example
 -------
@@ -19,6 +19,20 @@ Example
     14 15 16 17 18 19 20 
     21 22 23 24 25 26 27 
     28 
+
+Notes
+-----
+
+If the host has a supported real-time clock, the current month and year will be
+used if these are not supplied on the command line. The value from the RTC can,
+of course, be overridden on the command line.
+
+A week is taken to start on Monday, unless /s is given, in which case it starts
+on Sunday. 
+
+The year must be a four-digit value. Year '23' is not 2023, but some time in
+the Roman Empire.
+
 
 Author
 ------

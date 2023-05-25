@@ -1,6 +1,6 @@
 ;------------------------------------------------------------------------
 ;  conio.asm 
-;
+;  See conio.inc for descriptions
 ;  Copyright (c)2022 Kevin Boone, GPL v3.0
 ;------------------------------------------------------------------------
 
@@ -8,7 +8,7 @@
 
 	include bdos.inc
 
-	global putch, puts, space, newline, exit
+	global putch, puts, space, newline, exit, puth8
 
 ;------------------------------------------------------------------------
 ; exit
@@ -87,6 +87,43 @@ space:
        CALL   putch
        POP    AF
        RET
+
+;------------------------------------------------------------------------
+;  putdigit
+;  Output a single hex digit in A; other registers preserved 
+;------------------------------------------------------------------------
+putdigit:
+	PUSH   AF
+	CP     10        ; Digit >= 10
+	JR     C, .putdigit_lt
+	ADD    A, 'A' - 10
+	CALL   putch
+	POP    AF
+	RET
+.putdigit_lt:            ; Digit < 10
+	ADD    A, '0'
+	CALL   putch
+	POP    AF
+	RET
+
+;------------------------------------------------------------------------
+;  puth8 
+;  Output two-digit hex number in A; all registers preserved 
+;------------------------------------------------------------------------
+puth8:
+	PUSH    AF
+	PUSH	AF
+	SRA     A
+	SRA     A
+	SRA     A
+	SRA     A
+	AND     0Fh
+	CALL    putdigit
+	POP     AF
+	AND     0Fh
+	CALL    putdigit
+	POP     AF
+	RET
 
 end
 

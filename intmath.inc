@@ -1,9 +1,11 @@
 ;------------------------------------------------------------------------
-;  dbgutil.inc
+;  intmath.inc
+; 
+;  16-bit integer multiplication and division
+;  Be aware that these functions can overflow, and no error is raised.
+; 
 ;  Copyright (c)2021 Kevin Boone, GPL v3.0
 ;------------------------------------------------------------------------
-
-; List of the global symbols in intmath 
 
 	.Z80
 

@@ -1,5 +1,8 @@
 ;------------------------------------------------------------------------
 ;  string.inc
+; 
+;  Functions for working with C-style, zero-terminated strings
+;
 ;  Copyright (c)2021 Kevin Boone, GPL v3.0
 ;------------------------------------------------------------------------
 

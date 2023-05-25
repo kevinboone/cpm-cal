@@ -14,7 +14,7 @@ TARGET=cal.com
 
 all: $(TARGET)
 
-main.rel: main.asm conio.inc intmath.inc clargs.inc date.inc
+main.rel: main.asm conio.inc intmath.inc clargs.inc date.inc romwbw.inc
 	$(CPM) $(MACRO80) =main.asm
 
 conio.rel: conio.asm bdos.inc
@@ -35,8 +35,11 @@ date.rel: date.asm intmath.inc
 clargs.rel: clargs.asm mem.inc
 	$(CPM) $(MACRO80) =clargs.asm
 
-$(TARGET): conio.rel main.rel intmath.rel string.rel mem.rel clargs.rel date.rel
-	$(CPM) $(LINK80) main,conio,intmath,string,mem,clargs,date,$(NAME)/n/e
+romwbw.rel: romwbw.asm romwbw.inc
+	$(CPM) $(MACRO80) =romwbw.asm
+
+$(TARGET): conio.rel main.rel intmath.rel string.rel mem.rel clargs.rel date.rel romwbw.rel
+	$(CPM) $(LINK80) main,conio,intmath,string,mem,clargs,date,romwbw,$(NAME)/n/e
 
 clean:
 	rm -f $(TARGET) *.rel

@@ -1,5 +1,8 @@
 ;------------------------------------------------------------------------
 ;  mem.inc
+;
+;  Functions for initializing and copying memory
+;
 ;  Copyright (c)2021 Kevin Boone, GPL v3.0
 ;------------------------------------------------------------------------
 
@@ -12,5 +15,7 @@
 external memset 
 
 ; Copy BC bytes from HL to DE. All registers preserved. 
+; The memory regions should not overlap -- the function does not check 
+;   for this
 external memcpy
 
