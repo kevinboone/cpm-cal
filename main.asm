@@ -10,6 +10,7 @@
 
 	.Z80
 
+	ASEG
 	ORG    0100H
 
 	include conio.inc
@@ -18,6 +19,14 @@
 	include date.inc
 	include string.inc
 	include romwbw.inc
+
+	.request conio
+	.request clargs 
+	.request intmath 
+	.request date 
+	.request string 
+	.request romwbw 
+	.request mem 
 
 	JP	main
 
@@ -409,7 +418,7 @@ us_msg:
         db 13, 10, 0
 
 ver_msg:
-	db "cal 0.1c, copyright (c)2023 Kevin Boone, GPL v3.0"
+	db "cal 0.1d, copyright (c)2023 Kevin Boone, GPL v3.0"
         db 13, 10, 0
 
 bm_msg:

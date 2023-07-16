@@ -77,6 +77,11 @@ Z80-based CP/M machine, just to prove it really works.
 
 ## Revisions
 
+0.1d July 2023
+
+- Fixed some bugs in command-line parsing
+- Tidied up linker invocation
+
 0.1c May 2023
 
 - Added support for ROMWBW real-time clock
