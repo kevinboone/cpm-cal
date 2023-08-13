@@ -10,20 +10,20 @@ This is my first attempt in nearly 40 years to write something reasonably
 substantial, entirely in Z80 assembly language. It's a (somewhat cut down)
 implementation of the Unix `cal` utility, for CP/M. The usage is
 straightforward:
-
-    A> cal {month} {year}
-
+```
+A> cal {month} {year}
+```
 For example
-
-    A> cal 2 2022
-    February 2022
-    Mo Tu We Th Fr Sa Su
-        1  2  3  4  5  6 
-     7  8  9 10 11 12 13 
-    14 15 16 17 18 19 20 
-    21 22 23 24 25 26 27 
-    28 
-
+```
+A> cal 2 2022
+   February 2022      
+Su Mo Tu We Th Fr Sa  
+       1  2  3  4  5  
+ 6  7  8  9 10 11 12  
+13 14 15 16 17 18 19  
+20 21 22 23 24 25 26  
+27 28  
+```
 I wrote a C version of this utility for the Manx Aztec C compiler, 
 which results in an 11kB `.com` file.  This assembly-language version is 
 about 2kB. 
