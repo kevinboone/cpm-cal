@@ -72,10 +72,12 @@ In case I should start feeling pleased with myself for fitting this all
 into 2k, I remind myself that the entire _assembler_ 
 is only 20k. 
  
-The screenshot in this source bundle shows `cal` running on a real
-Z80-based CP/M machine, just to prove it really works.
-
 ## Revisions
+
+0.1e Aug 2023
+
+- Fixed up the entry point
+- Centred display of month and year
 
 0.1d July 2023
 

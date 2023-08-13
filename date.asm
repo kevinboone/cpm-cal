@@ -285,16 +285,16 @@ monthname:
 t_mon:
 	db 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4
 
-mn_jan: db "January", 0
+mn_jan: db " January", 0
 mn_feb: db "February", 0
-mn_mar: db "March", 0
-mn_apr: db "April", 0
-mn_may: db "May", 0
-mn_jun: db "June", 0
-mn_jul: db "July", 0
-mn_aug: db "August", 0
+mn_mar: db "  March", 0
+mn_apr: db "  April", 0
+mn_may: db "   May", 0
+mn_jun: db "  June", 0
+mn_jul: db "  July", 0
+mn_aug: db " August", 0
 mn_sep: db "September", 0
-mn_oct: db "October", 0
+mn_oct: db " October", 0
 mn_nov: db "November", 0
 mn_dec: db "December", 0
 

@@ -90,6 +90,9 @@ m_arg1:
 ;------------------------------------------------------------------------
 putmonth:
 	PUSH	HL
+	CALL	SPACE		; Pad month..
+	CALL	SPACE
+	CALL	SPACE
 	CALL	monthname
 	; HL points to name
 	CALL	puts
