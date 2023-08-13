@@ -1,3 +1,13 @@
-l80.com
-m80.com
-*.rel
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.asm
+!*.inc
+
+# Unignore documentation
+!LICENSE
+!*.md
+
+
+
