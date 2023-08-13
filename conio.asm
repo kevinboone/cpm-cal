@@ -6,7 +6,7 @@
 
  	.Z80
 
-	include bdos.inc
+	include BDOS.INC
 
 	global putch, puts, space, newline, exit, puth8
 

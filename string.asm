@@ -7,7 +7,7 @@
  	.Z80
 
 	global strlen, strcpy, streverse, utoa, atou
-	include intmath.inc
+	include INTMATH.INC
 
 ;------------------------------------------------------------------------
 ; strlen 

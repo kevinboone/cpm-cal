@@ -6,7 +6,7 @@
 
  	.Z80
 
-	include conio.inc
+	include CONIO.INC
 
 	; ROMWBW stores a pointer to a magic number at 0xFFFE.
 	RWBW_MAGIC_PTR	equ 0fffeH

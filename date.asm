@@ -7,7 +7,7 @@
  	.Z80
 
 	global day_of_week, is_leap_year, days_in_month, monthname
-	include intmath.inc
+	include INTMATH.INC
 
 ;------------------------------------------------------------------------
 ;  day_of_week 

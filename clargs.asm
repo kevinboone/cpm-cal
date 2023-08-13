@@ -10,8 +10,8 @@
 
  	.Z80
 
-	include conio.inc
-	include mem.inc
+	include CONIO.INC
+	include MEM.INC
 	global clinit, clnext 
 
 ;------------------------------------------------------------------------

@@ -39,7 +39,7 @@ romwbw.rel: romwbw.asm romwbw.inc
 	$(CPM) $(MACRO80) =romwbw.asm
 
 $(TARGET): conio.rel main.rel intmath.rel string.rel mem.rel clargs.rel date.rel romwbw.rel
-	$(CPM) $(LINK80) /p:100,main,$(NAME)/n/e
+	$(CPM) $(LINK80) main,$(NAME)/n/e
 
 clean:
 	rm -f $(TARGET) *.rel

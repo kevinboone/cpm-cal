@@ -8,17 +8,12 @@
 ;
 ;------------------------------------------------------------------------
 
-	.Z80
-
-	ASEG
-	ORG    0100H
-
-	include conio.inc
-	include clargs.inc
-	include intmath.inc
-	include date.inc
-	include string.inc
-	include romwbw.inc
+	include CONIO.INC
+	include CLARGS.INC
+	include INTMATH.INC
+	include DATE.INC
+	include STRING.INC
+	include ROMWBW.INC
 
 	.request conio
 	.request clargs 
@@ -27,8 +22,6 @@
 	.request string 
 	.request romwbw 
 	.request mem 
-
-	JP	main
 
 ;------------------------------------------------------------------------
 ;  prthelp 
@@ -460,5 +453,5 @@ rtcmi:  ; min
 rtcse:  ; sec
 	db 0
 
-end 
+end 	main
 
