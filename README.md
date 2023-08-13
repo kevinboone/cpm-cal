@@ -2,7 +2,7 @@
 
 A Unix-like cal(endar) utility for CP/M
 
-Version 0.1c, May 2023
+Version 0.1e, Aug 2023
 
 ## What is this?
 
