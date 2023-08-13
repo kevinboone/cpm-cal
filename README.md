@@ -2,7 +2,7 @@
 
 A Unix-like cal(endar) utility for CP/M
 
-Version 0.1e, Aug 2023
+Version 0.1f, Aug 2023
 
 ## What is this?
 
@@ -16,13 +16,13 @@ A> cal {month} {year}
 For example
 ```
 A> cal 2 2022
-   February 2022      
-Su Mo Tu We Th Fr Sa  
-       1  2  3  4  5  
- 6  7  8  9 10 11 12  
-13 14 15 16 17 18 19  
-20 21 22 23 24 25 26  
-27 28  
+   February 2022
+Su Mo Tu We Th Fr Sa
+       1  2  3  4  5 
+ 6  7  8  9 10 11 12 
+13 14 15 16 17 18 19 
+20 21 22 23 24 25 26 
+27 28 
 ```
 I wrote a C version of this utility for the Manx Aztec C compiler, 
 which results in an 11kB `.com` file.  This assembly-language version is 
@@ -40,6 +40,7 @@ I wrote this utility to be built on CP/M using the Microsoft
 Macro80 assembler and Link80 linker. These are available from here:
 
 http://www.retroarchive.org/cpm/lang/m80.com
+
 http://www.retroarchive.org/cpm/lang/l80.com
 
 Assemble all the `.asm` files to produce `.rel` files, then feed all
@@ -74,6 +75,11 @@ is only 20k.
  
 ## Revisions
 
+0.1f Aug 2023
+
+- Displays the days of the week starting on a Sunday by default.  
+  To start the week on a Monday use '/M'
+
 0.1e Aug 2023
 
 - Fixed up the entry point
@@ -95,5 +101,3 @@ is only 20k.
 0.1a February 2022
 
 - First release
-
-

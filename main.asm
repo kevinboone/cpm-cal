@@ -167,6 +167,12 @@ main:
 	LD	(wssun), A
 	JR	.nextarg
 .no_s:
+	CP	'M'
+	JR	NZ, .no_m
+	LD	A, 0
+	LD	(wssun), A
+	JR	.nextarg
+.no_m:
 	CP	'V'
 	JR	NZ, .no_v
 	CALL	prtversion
@@ -398,7 +404,9 @@ blank:
 hlpmsg: 	
 	db "/h show help text"
         db 13, 10
-	db "/s week starts sunday"
+	db "/s week starts sunday (default)"
+        db 13, 10
+	db "/m week starts on a monday"
         db 13, 10
 	db "/v show version"
         db 13, 10
@@ -410,11 +418,11 @@ numbuff:
 	db 0
 
 us_msg:
-	db "Usage: cal [/hsv] {month} {4-digit year}"
+	db "Usage: cal [/hsmv] {month} {4-digit year}"
         db 13, 10, 0
 
 ver_msg:
-	db "cal 0.1d, copyright (c)2023 Kevin Boone, GPL v3.0"
+	db "cal 0.1f, copyright (c)2023 Kevin Boone, GPL v3.0"
         db 13, 10, 0
 
 bm_msg:
@@ -438,7 +446,7 @@ year:
 	dw 0
 
 ; Flag to indicate user wants week to start on Sunday
-wssun:	db 0
+wssun:	db 1		; Default to true
 
 ; Six-byte buffer for date/time from the RTC. We can refer to the start of
 ;   this buffer as rtcbuf, and the individual elements as rtcmo, rtcda, etc.
